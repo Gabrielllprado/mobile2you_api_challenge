@@ -1,7 +1,7 @@
 # mobile2you Api Challenge
 Desafio de desenvolvimento de API para a empresa mobile2you
 
-A solução proposta para o desafio consiste na criação de uma rota POST que vai receber um arquivo no formato CSV, para que o endpoint faça a inserção dos registros do CSV no banco de dados, e de uma rota GET que será responsável por exibir os registros inseridos filtrados por ano e ainda podendo ser adicionados outros filtros (release_year, media_type, country)
+A solução proposta para o desafio consiste na criação de uma rota POST que vai receber um arquivo no formato CSV, para que o endpoint faça a inserção dos registros do CSV no banco de dados, e de uma rota GET que será responsável por exibir os registros inseridos ordenados pelo ano de lançamento, está disponível também a possibilidade de filtragem dos registros pelos seguintes campos: `release_year`, `media_type` e `country`
 
 ## Tecnologias utilizadas
   - Ruby 2.5.1
@@ -26,7 +26,15 @@ A solução proposta para o desafio consiste na criação de uma rota POST que v
   ```
 
 ## Executar os testes
+  Foi utilizado o rspec para a codificação dos testes unitários, para executá-los use o seguinte comando:
 
   ```
     rspec
   ```
+  Um arquivo com a cobertura dos testes pode ser encontrado no seguinte caminho `coverage/index.html` abra-o após a execução dos testes.
+## Gerando documentação
+  Para gerar a documentação da API execute o seguinte comando
+  ```
+    SWAGGER_DRY_RUN=0 RAILS_ENV=test rails rswag
+  ```
+  Na sequência acesse o caminho `localhost:3000/api-docs` para visualizar a documentação gerada
