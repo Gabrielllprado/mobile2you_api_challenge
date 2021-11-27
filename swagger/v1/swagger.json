@@ -1,0 +1,117 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "API Mobile2You Challenge",
+    "version": "v1"
+  },
+  "paths": {
+    "/list_titles": {
+      "get": {
+        "summary": "List Netflix titles",
+        "tags": [
+          "Netflix Titles"
+        ],
+        "parameters": [
+          {
+            "name": "filter[release_year][eq]",
+            "in": "query",
+            "required": false,
+            "example": 2020,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "filter[country][eq]",
+            "in": "query",
+            "required": false,
+            "example": "United States",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "filter[media_type][eq]",
+            "in": "query",
+            "required": false,
+            "example": "Movie",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful",
+            "content": {
+              "application/json": {
+                "example": [
+                  {
+                    "id": "s148",
+                    "title": "A Babysitter's Guide to Monster Hunting",
+                    "genre": "Movie",
+                    "year": 2020,
+                    "country": "United States",
+                    "published_at": "2020-10-15T00:00:00.000Z",
+                    "description": "Recruited by a secret society of babysitters, a high schooler battles the Boogeyman and his monsters when they nab the boy she's watching on Halloween."
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Insert data from CSV file",
+        "tags": [
+          "Netflix Titles"
+        ],
+        "parameters": [
+
+        ],
+        "responses": {
+          "201": {
+            "description": "Titles Saved in database",
+            "content": {
+              "application/json": {
+                "example": "Titles Saved in database"
+              }
+            }
+          },
+          "422": {
+            "description": "Error empty file",
+            "content": {
+              "application/json": {
+                "example": "File can't be read: undefined method `tempfile' for nil:NilClass"
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "file": {
+                    "type": "file"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "servers": [
+    {
+      "url": "http://{defaultHost}",
+      "variables": {
+        "defaultHost": {
+          "default": "localhost:3000"
+        }
+      }
+    }
+  ]
+}

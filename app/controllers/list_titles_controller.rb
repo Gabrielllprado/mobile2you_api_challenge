@@ -7,7 +7,7 @@ class ListTitlesController < ApplicationController
 
     def create
         begin
-            file = File.open(title_params[:path])
+            file = File.open(title_params.tempfile)
             file_read = file.read
             titles = create_objects(file_read)
             ListTitle.transaction do
@@ -19,15 +19,17 @@ class ListTitlesController < ApplicationController
                                         status: :unprocessable_entity
                 end
             end
-        rescue Errno::ENOENT => e
-            render json: e, status: :unprocessable_entity
+        rescue SystemCallError => e
+            render json: e.inspect, status: :unprocessable_entity
+        rescue NoMethodError => e
+            render json: "File can't be read: #{e}", status: :unprocessable_entity
         end
     end
 
     private
 
     def title_params
-        params.require(:file).permit(:path)
+        params[:file]
     end
 
     def filter_params
