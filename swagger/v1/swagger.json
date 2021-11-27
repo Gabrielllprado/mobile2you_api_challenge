@@ -18,7 +18,52 @@
             "required": false,
             "example": 2020,
             "schema": {
-              "type": "integer"
+              "type": "string"
+            }
+          },
+          {
+            "name": "filter[release_year][neq]",
+            "in": "query",
+            "required": false,
+            "example": 2020,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "filter[release_year][lt]",
+            "in": "query",
+            "required": false,
+            "example": 2020,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "filter[release_year][gt]",
+            "in": "query",
+            "required": false,
+            "example": 2020,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "filter[release_year][lte]",
+            "in": "query",
+            "required": false,
+            "example": 2020,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "filter[release_year][gte]",
+            "in": "query",
+            "required": false,
+            "example": 2020,
+            "schema": {
+              "type": "string"
             }
           },
           {
@@ -31,7 +76,79 @@
             }
           },
           {
+            "name": "filter[country][neq]",
+            "in": "query",
+            "required": false,
+            "example": "United States",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "filter[country][contain]",
+            "in": "query",
+            "required": false,
+            "example": "United States",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "filter[country][ilike]",
+            "in": "query",
+            "required": false,
+            "example": "United States",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "filter[country][like]",
+            "in": "query",
+            "required": false,
+            "example": "United States",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
             "name": "filter[media_type][eq]",
+            "in": "query",
+            "required": false,
+            "example": "Movie",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "filter[media_type][neq]",
+            "in": "query",
+            "required": false,
+            "example": "Movie",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "filter[media_type][contain]",
+            "in": "query",
+            "required": false,
+            "example": "Movie",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "filter[media_type][ilike]",
+            "in": "query",
+            "required": false,
+            "example": "Movie",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "filter[media_type][like]",
             "in": "query",
             "required": false,
             "example": "Movie",

@@ -6,11 +6,28 @@ RSpec.describe 'list_titles', type: :request do
 
     get "List Netflix titles" do
       tags "Netflix Titles"
-      parameter name: "filter[release_year][eq]", in: :query, type: :integer, required: false, example: 2020
+      parameter name: "filter[release_year][eq]", in: :query, type: :string, required: false, example: 2020
+      parameter name: "filter[release_year][neq]", in: :query, type: :string, required: false, example: 2020
+      parameter name: "filter[release_year][lt]", in: :query, type: :string, required: false, example: 2020
+      parameter name: "filter[release_year][gt]", in: :query, type: :string, required: false, example: 2020
+      parameter name: "filter[release_year][lte]", in: :query, type: :string, required: false, example: 2020
+      parameter name: "filter[release_year][gte]", in: :query, type: :string, required: false, example: 2020
+
       parameter name: "filter[country][eq]", in: :query, type: :string, required: false, example: "United States"
+      parameter name: "filter[country][neq]", in: :query, type: :string, required: false, example: "United States"
+      parameter name: "filter[country][contain]", in: :query, type: :string, required: false, example: "United States"
+      parameter name: "filter[country][ilike]", in: :query, type: :string, required: false, example: "United States"
+      parameter name: "filter[country][like]", in: :query, type: :string, required: false, example: "United States"
+
       parameter name: "filter[media_type][eq]", in: :query, type: :string, required: false, example: "Movie"
+      parameter name: "filter[media_type][neq]", in: :query, type: :string, required: false, example: "Movie"
+      parameter name: "filter[media_type][contain]", in: :query, type: :string, required: false, example: "Movie"
+      parameter name: "filter[media_type][ilike]", in: :query, type: :string, required: false, example: "Movie"
+      parameter name: "filter[media_type][like]", in: :query, type: :string, required: false, example: "Movie"
 
       response "200", 'successful' do
+        let(:"filter[release_year][eq]") {2020}
+        let(:"filter[country][contain]") {"United States"}
         after do |example|
           example.metadata[:response][:content] = {
             'application/json' => {

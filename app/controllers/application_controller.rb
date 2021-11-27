@@ -25,8 +25,6 @@ class ApplicationController < ActionController::API
         return table[field].lteq(value) if operator == 'lte'
         return table[field].gteq(value) if operator == 'gte'
 
-        in_values = value.gsub(/[ ],[ ]*/, ',').split(',')
-        return table[field].in(in_values) if %w[nin not_in in].include?(operator) && in_values.size.positive?
         return table[field].matches("%#{value.gsub(/[ ]+/, '%')}%") if %w[ilike like contain].include?(operator)
     end
 
