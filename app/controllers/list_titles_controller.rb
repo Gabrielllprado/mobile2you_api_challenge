@@ -24,9 +24,9 @@ class ListTitlesController < ApplicationController
                 end
             end
         rescue SystemCallError => e
-            render json: e.inspect, status: :unprocessable_entity
+            render json: e.inspect, status: :bad_request
         rescue NoMethodError => e
-            render json: "File can't be read: #{e}", status: :unprocessable_entity
+            render json: "File can't be read: #{e}", status: :bad_request
         end
     end
 

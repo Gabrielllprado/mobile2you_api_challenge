@@ -28,20 +28,15 @@ RSpec.describe 'list_titles', type: :request do
       response "200", 'successful' do
         let(:"filter[release_year][eq]") {2020}
         let(:"filter[country][contain]") {"United States"}
+
+        before do
+          ListTitle.destroy_all
+          ListTitle.create!(show_id: "s148", title: "A Babysitter's Guide to Monster Hunting", media_type: "Movie", release_year: 2020, country: "United States", date_added: Time.now, description: "Recruited by a secret society of babysitters, a high schooler battles the Boogeyman and his monsters when they nab the boy she's watching on Halloween.")
+        end
         after do |example|
           example.metadata[:response][:content] = {
             'application/json' => {
-              example: [
-                {
-                  "id": "s148",
-                  "title": "A Babysitter's Guide to Monster Hunting",
-                  "genre": "Movie",
-                  "year": 2020,
-                  "country": "United States",
-                  "published_at": "2020-10-15T00:00:00.000Z",
-                  "description": "Recruited by a secret society of babysitters, a high schooler battles the Boogeyman and his monsters when they nab the boy she's watching on Halloween."
-                }
-              ]
+              example: JSON.parse(response.body, symbolize_names: true)
             }
           }
         end
@@ -74,8 +69,24 @@ RSpec.describe 'list_titles', type: :request do
         run_test!
       end
 
-      response '422', "Error empty file" do
+      response '400', "Error empty file" do
         let(:file) {}
+        after do |example|
+          example.metadata[:response][:content] = {
+            'application/json' => {
+              example: JSON.parse(response.body.to_json)
+            }
+          }
+        end
+        run_test!
+      end
+
+      response '422', "Error unique record" do
+        let(:file) {Rack::Test::UploadedFile.new(Rails.root.join('spec/netflix_titles.csv')) }
+        before do
+          ListTitle.destroy_all
+          ListTitle.create!(show_id: "s148", title: "A Babysitter's Guide to Monster Hunting", media_type: "Movie", release_year: 2020, country: "United States", date_added: Time.now, description: "Recruited by a secret society of babysitters, a high schooler battles the Boogeyman and his monsters when they nab the boy she's watching on Halloween.")
+        end
         after do |example|
           example.metadata[:response][:content] = {
             'application/json' => {

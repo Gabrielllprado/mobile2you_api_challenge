@@ -169,7 +169,7 @@
                     "genre": "Movie",
                     "year": 2020,
                     "country": "United States",
-                    "published_at": "2020-10-15T00:00:00.000Z",
+                    "published_at": "2021-11-28",
                     "description": "Recruited by a secret society of babysitters, a high schooler battles the Boogeyman and his monsters when they nab the boy she's watching on Halloween."
                   }
                 ]
@@ -195,11 +195,29 @@
               }
             }
           },
+          "400": {
+            "description": "Error empty file"
+          },
           "422": {
-            "description": "Error empty file",
+            "description": "Error unique record",
             "content": {
               "application/json": {
-                "example": "File can't be read: undefined method `tempfile' for nil:NilClass"
+                "example": {
+                  "errors": [
+                    [
+                      {
+                        "id": "s148",
+                        "column": "show_id",
+                        "title": "Must be unique."
+                      },
+                      {
+                        "id": "s148",
+                        "column": "title",
+                        "title": "Must be unique."
+                      }
+                    ]
+                  ]
+                }
               }
             }
           }

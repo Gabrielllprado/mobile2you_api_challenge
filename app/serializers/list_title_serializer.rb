@@ -14,6 +14,6 @@ class ListTitleSerializer < ActiveModel::Serializer
   end
 
   def published_at
-    object.date_added
+    object.date_added.to_date
   end
 end
