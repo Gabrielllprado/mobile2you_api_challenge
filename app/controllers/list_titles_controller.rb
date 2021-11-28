@@ -7,10 +7,14 @@ class ListTitlesController < ApplicationController
 
     def create
         begin
+            #lê o arquivo recebido pela API
             file = File.open(title_params.tempfile)
             file_read = file.read
+
+            #cria os objetos a partir do arquivo recebido
             titles = create_objects(file_read)
             ListTitle.transaction do
+                #salva todos os registros na base
                 success = titles.map(&:save)
                 if success.all?
                     render json: "Titles Saved in database", status: :created

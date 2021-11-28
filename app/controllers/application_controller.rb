@@ -3,6 +3,8 @@ class ApplicationController < ActionController::API
     def filtered_result(model, filter)
         table = model.arel_table
         filter = permitted_params(filter)
+
+        #passa por cada filtro para montar as querys e executá-las
         filter&.each do |key, value|
           value.each do |operator, operator_value|
 
@@ -16,6 +18,7 @@ class ApplicationController < ActionController::API
         model
     end
 
+    #tratamento para os operadores passados nos filtros
     def operator_value(table, field, operator, value)
         operator = operator.to_s
         return table[field].eq(value) if operator == 'eq'
@@ -28,6 +31,7 @@ class ApplicationController < ActionController::API
         return table[field].matches("%#{value.gsub(/[ ]+/, '%')}%") if %w[ilike like contain].include?(operator)
     end
 
+    #filtra somente os filtros permitidos para a aplicação
     def permitted_params(filter)
         new_filter = {}
         filter&.each do |key, value|

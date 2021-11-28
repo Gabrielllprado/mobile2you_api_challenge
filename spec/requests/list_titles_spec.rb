@@ -79,7 +79,7 @@ RSpec.describe 'list_titles', type: :request do
         after do |example|
           example.metadata[:response][:content] = {
             'application/json' => {
-              example: response.body
+              example: JSON.parse(response.body.to_json)
             }
           }
         end
